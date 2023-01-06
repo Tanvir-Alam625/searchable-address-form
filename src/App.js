@@ -22,7 +22,7 @@ function App() {
 // .then(data => console.log(data))
 //   },[])
   return (
-    <div className="App">
+    <div>
       <Form />
     </div>
   );

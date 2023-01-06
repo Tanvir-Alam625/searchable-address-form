@@ -1,6 +1,7 @@
 .App {
   text-align: center;
 }
+/* shopping address styles  */
 .shopping-address-container{
   display: flex;
   justify-content: center;
@@ -9,4 +10,113 @@
   max-width: 900px;
   margin: 20px auto;
 }
+.bill-address{
+  width: 50%;
+  padding: 0 20px 0 5px;
+}
+.bill-address h3{
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-size: 24px;
+  font-weight: 500;
+  color: rgb(87, 87, 87);
+}
+.bill-address h4{
+  padding: 0px;
+  margin: 0px;
+  letter-spacing: 0.2px;
+  font-weight: 500;
+  font-size: 22px;
+  color: rgb(87, 87, 87);
+}
+.input-group{
+  margin: 20px 0;
+}
+.input-group label{
+  font-size: 20px;
+  font-weight: 200;
+  font-family: sans-serif;
 
+}
+.countries{
+  padding: 5px 0 5px 15px;
+  font-size: 20px;
+  font-weight: 400;
+  display: flex;
+  height: 40px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid rgba(198, 196, 196, 0.787);
+  border-radius: 3px;
+  margin: 3px 0;
+  cursor: pointer;
+}
+.icon-container .icon{
+  height: 20px;
+  font-weight: 500;
+  margin-right: 10px;
+  transition:300ms ease-in-out;
+}
+.icon-container .icon.active{
+  transform: rotate(-180deg);
+}
+.select-container{
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 3px;
+  display: none;
+}
+.select-container.active{
+  display: block;
+}
+.select-items{
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.select-items::-webkit-scrollbar{
+  width: 10px;
+}
+.select-items::-webkit-scrollbar-track{
+  height: 100%;
+}
+.select-items::-webkit-scrollbar-thumb{
+  background-color: #878787;
+  border-radius:20px;
+  transition: 400ms ease-in-out;
+}
+.select-items::-webkit-scrollbar-thumb:hover{
+  background-color: #2a3447;
+}
+.select-container input{
+  width: 93%;
+  padding: 5px 12px;
+  outline: 0;
+  font-size: 20px;
+  font-weight: 300;
+  border: 1px solid rgba(198, 196, 196, 0.787);
+  border-radius: 3px;
+}
+.select-container ul{
+  list-style: none;
+  padding: 2px;
+}
+.select-container ul span{
+  text-align: center;
+}
+.select-container ul li{
+  margin: 5px 0;
+  padding: 3px 10px;
+  font-weight: 400;
+  cursor: pointer;
+  font-size: 20px;
+  transition: 300ms ease-in-out;
+  border-radius: 3px;
+}
+.select-container ul li:hover{
+  color: aqua;
+  font-weight: 500;
+  background-color: white;
+}

@@ -1,4 +1,5 @@
-import { useEffect, useReducer,  useState } from "react";
+import { useContext, useEffect, useReducer,  useState } from "react";
+import { ADDRESS_CONTEXT } from "../../App";
 import useDivision from "../../hooks/useDivision";
 import { billingReducer} from "../../state/action";
 import { billingAddress } from "../../state/state";
@@ -6,6 +7,7 @@ import { billingAddress } from "../../state/state";
  
 const BillingAddress = () =>{
     const [toggle, setToggle] = useState({clicked:''})
+    const {state, dispatch}=useContext(ADDRESS_CONTEXT)
     const [loading, setLoading] = useState(false);
     //  for division 
     const {divisions, isLoading} =useDivision()
@@ -26,8 +28,8 @@ const BillingAddress = () =>{
     // for zipcode 
     const [zipcode, setZipcode] = useState([]);
     // state 
-    const [state, dispatch] = useReducer(billingReducer, billingAddress)
-    console.log(state);
+    // const [state, dispatch] = useReducer(billingReducer, billingAddress)
+    // console.log(state);
     // toggle selection functionality 
     const getToggle = clicked => toggle.clicked ? setToggle({clicked:''}) :  setToggle({clicked:clicked})
     // division search functionality
@@ -38,7 +40,6 @@ const BillingAddress = () =>{
                 setSearchedDivisions(()=> searchedData )
             }
      }  
-
      // district search functionality
      const handleSearchDistrict = async (event)=>{ 
         const searchValue = event.target.value.toLowerCase()
@@ -97,7 +98,7 @@ const BillingAddress = () =>{
             setLoading(false)
         })
      }
-    //  load unions name 
+    //  load zipcode name 
      const getZipcode =(name) =>{
         setLoading(true)
         const url = `https://bicycle-pars-tanvir-alam625.onrender.com/bd/zipcodes/${name}`
@@ -118,6 +119,7 @@ const BillingAddress = () =>{
         setToggle({clicked:''})
         setDivisionName(name)
         getDistrict(id)
+        console.log(state);
     }
     // select district value function 
     const handleDistrictValue = (id, name, type) =>{
@@ -302,7 +304,7 @@ const BillingAddress = () =>{
                         !zipcode[0]?.postCode &&  <input type='number' onBlur={(e)=>dispatch({type:"ZIPCODE",  payload: e.target.value})} className="inputText"  placeholder="Type your here" />
                        }
                         {
-                            zipcode[0]?.postCode && <input type='number'  value={zipcode[0]?.postCode} className="inputText" readOnly />
+                         zipcode[0]?.postCode &&  <input type='number'  value={zipcode[0]?.postCode} className="inputText" readOnly />
                         }
                     </div>
                 </div>

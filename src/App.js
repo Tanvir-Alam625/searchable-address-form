@@ -8,7 +8,7 @@ export const ADDRESS_CONTEXT =  createContext()
 
 function App() {
   const [state, dispatch] = useReducer(billingReducer, billingAddress)
-  const value ={state, dispatch}
+  const value ={state,dispatch}
     return (
       <ADDRESS_CONTEXT.Provider value={value} >
         <div>

@@ -6,15 +6,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 20px auto;
 }
 .bill-address{
   width: 50%;
   padding: 0 20px 0 5px;
 }
-.bill-address h3{
+.bill-address h3,
+.shoping-address h3{
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.3px;
@@ -22,16 +22,10 @@
   font-weight: 500;
   color: rgb(87, 87, 87);
 }
-.bill-address h4{
-  padding: 0px;
-  margin: 0px;
-  letter-spacing: 0.2px;
-  font-weight: 500;
-  font-size: 22px;
-  color: rgb(87, 87, 87);
-}
+
 .input-group{
   margin: 20px 0;
+  position: relative;
 }
 .input-group label{
   font-size: 20px;
@@ -64,9 +58,14 @@
 }
 .select-container{
   padding: 10px;
+  position: absolute;
+  width: 95%;
+  z-index: 99;
   background-color: #f0f0f0;
   border-radius: 3px;
   display: none;
+  box-shadow: 0px 1px 1px lightgray;
+
 }
 .select-container.active{
   display: block;
@@ -119,4 +118,61 @@
   color: aqua;
   font-weight: 500;
   background-color: white;
+}
+.inputText{
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 3px;
+  border: 1px solid rgba(198, 196, 196, 0.787);
+  background-color: #f0f0f0;
+  outline: 0;
+  width: 95.5%;
+}
+.shoping-head{
+  display: flex;
+} 
+.btn-copy{
+  display: flex;
+  background-color: transparent;
+  align-items: center;
+  border: 0;
+  outline: 0;
+  margin: 0 10px;
+  padding: 0 5px ;
+  color: blue;
+  font-weight: 500;
+  font-size: 20px;
+  text-decoration: underline;
+}
+.btn-icon{
+  height: 20px;
+}
+.modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  z-index: 99;
+}
+.modal-content{
+  background-color: #d1d1d1;
+  position: relative;
+  height: 500px;
+  margin-top: 100px;
+  min-width: 500px;
+  z-index: 99;
+  box-shadow: 0 1px 3px lightgray;
+  border-radius: 7px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.modal-icon{
+  height: 35px;
+  color: black;
 }

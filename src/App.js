@@ -1,31 +1,21 @@
 
 import './App.css';
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useReducer, useState } from 'react';
 import Form from './components/Form';
-import useCountries from './hooks/useCountries';
+import { billingReducer } from './state/action';
+import { billingAddress } from './state/state';
+export const ADDRESS_CONTEXT =  createContext()
 
 function App() {
-//   useEffect(()=>{
-// const options = {
-//   method: 'GET',
-//   url: 'https://bdapi.p.rapidapi.com/v1.1/divisions',
-//   headers: {
-//     'X-RapidAPI-Key': 'fecb1ebb34msh0532c57e8a2deb3p1c8245jsne3742372431c',
-//     'X-RapidAPI-Host': 'bdapi.p.rapidapi.com'
-//   }
-// };
-// fetch(options.url,{
-//   method: options.method,
-//   headers: options.headers
-// })
-// .then(res=>res.json())
-// .then(data => console.log(data))
-//   },[])
-  return (
-    <div>
-      <Form />
-    </div>
-  );
+  const [state, dispatch] = useReducer(billingReducer, billingAddress)
+  const value ={state, dispatch}
+    return (
+      <ADDRESS_CONTEXT.Provider value={value} >
+        <div>
+          <Form />
+        </div>
+      </ADDRESS_CONTEXT.Provider>
+    );
 }
 
 export default App;

@@ -1,35 +1,27 @@
-import { useContext, useEffect, useReducer,  useState } from "react";
+import { useContext,  useState } from "react";
 import { ADDRESS_CONTEXT } from "../../App";
 import useDivision from "../../hooks/useDivision";
-import { billingReducer} from "../../state/action";
-import { billingAddress } from "../../state/state";
   
  
 const BillingAddress = () =>{
     const [toggle, setToggle] = useState({clicked:''})
     const {state, dispatch}=useContext(ADDRESS_CONTEXT)
     const [loading, setLoading] = useState(false);
+    const [billingAdd, setBillingAdd] = useState(state);
     //  for division 
     const {divisions, isLoading} =useDivision()
     const [searchedDivisions, setSearchedDivisions] = useState(null);
-    const [divisionName, setDivisionName] = useState('Please Search')
     // for district 
-    const [districtName, setDistrictName] = useState('Please Search')
     const [districts, setDistricts] = useState([])
     const [searchedDsitrict, setSearchedDsitrict] = useState(null);
     //  for upozila 
-    const [upozilaName, setUpozilaName] = useState('Please Search')
     const [upozilas, setUpozilas] = useState([])
     const [searchedUpozila, setSearchedUpozila] = useState(null);
     // for union 
-    const [unionName, setUnionName] = useState('Please Search')
     const [unions, setUnions] = useState([])
     const [searchedUnion, setSearchedUnion] = useState(null);
     // for zipcode 
     const [zipcode, setZipcode] = useState([]);
-    // state 
-    // const [state, dispatch] = useReducer(billingReducer, billingAddress)
-    // console.log(state);
     // toggle selection functionality 
     const getToggle = clicked => toggle.clicked ? setToggle({clicked:''}) :  setToggle({clicked:clicked})
     // division search functionality
@@ -117,7 +109,9 @@ const BillingAddress = () =>{
     const handleDivisionValue = (id, name, type) =>{
         dispatch({type:type,  payload:name});
         setToggle({clicked:''})
-        setDivisionName(name)
+        setBillingAdd(prev=>{
+            return { ...prev, division:name }
+        })
         getDistrict(id)
         console.log(state);
     }
@@ -125,14 +119,18 @@ const BillingAddress = () =>{
     const handleDistrictValue = (id, name, type) =>{
         dispatch({type:type,  payload:name});
         setToggle({clicked:''})
-        setDistrictName(name)
+        setBillingAdd(prev=>{
+            return { ...prev, district:name }
+        })
         getUpazilas(id)
     }
     // select upazila value function 
     const handleUpazilaValue = (id, name, type) =>{
         dispatch({type:type,  payload:name});
         setToggle({clicked:''})
-        setUpozilaName(name)
+        setBillingAdd(prev=>{
+            return { ...prev, city:name }
+        })
         getUnions(id)
         getZipcode(name)
     }
@@ -140,7 +138,9 @@ const BillingAddress = () =>{
     const handleUnionsValue = (name, type) =>{
         dispatch({type:type,  payload:name});
         setToggle({clicked:''})
-        setUnionName(name)
+        setBillingAdd(prev=>{
+            return { ...prev, union:name }
+        })
     }
 
     return(
@@ -159,7 +159,7 @@ const BillingAddress = () =>{
                 <div className="input-group">
                     <label htmlFor="division">Division/Province/State</label>
                     <div id="division"  onClick={()=>getToggle('division')}  className="countries">
-                        <p>{divisionName}</p>
+                        <p>{billingAdd?.division? billingAdd?.division : "Please Search"}</p>
                         <div className="icon-container">
                             <svg className={`icon ${toggle.clicked === 'division'? 'active':''}`}  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" >
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -176,11 +176,11 @@ const BillingAddress = () =>{
                                 }
                                 {/* initialize load tag */}
                                 {
-                                     !isLoading  && searchedDivisions === null && <span>Search Your Country</span>
+                                     !isLoading  && searchedDivisions === null && <li className="option">Search for select</li>
                                 }
                                 {/* no data show tag  */}
                                 {
-                                    !isLoading && searchedDivisions !== null && searchedDivisions.length <= 0 && <span> Oops! No Countries Show</span>
+                                    !isLoading && searchedDivisions !== null && searchedDivisions.length <= 0 && <span> Oops! No Divisions Show</span>
                                 }
                                 {/* show the searched country */}
                                 {
@@ -194,7 +194,7 @@ const BillingAddress = () =>{
                 <div className="input-group">
                     <label htmlFor="district">Dsitrict</label>
                     <div id="district"  onClick={()=>getToggle('district')}  className="countries">
-                        <p>{districtName}</p>
+                        <p>{billingAdd?.district? billingAdd?.district : "Please Search"}</p>
                         <div className="icon-container">
                             <svg className={`icon ${toggle.clicked === 'district'? 'active':''}`}  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" >
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -211,11 +211,11 @@ const BillingAddress = () =>{
                                 }
                                 {/* initialize load tag */}
                                 {
-                                     !loading  && searchedDsitrict === null && <span>Search Your Country</span>
+                                     !loading  && searchedDsitrict === null && <li className="option">Search for select</li>
                                 }
                                 {/* no data show tag  */}
                                 {
-                                    !isLoading && searchedDsitrict !== null && searchedDsitrict?.length <= 0 && <span> Oops! No Countries Show</span>
+                                    !isLoading && searchedDsitrict !== null && searchedDsitrict?.length <= 0 && <span> Oops! No Districts Show</span>
                                 }
                                 {/* show the searched country */}
                                 {
@@ -227,9 +227,9 @@ const BillingAddress = () =>{
                 </div>
                 {/* upazila field  */}
                 <div className="input-group">
-                    <label htmlFor="upazila">Thana/Upazila</label>
+                    <label htmlFor="upazila">City/Thana/Upazila</label>
                     <div id="upazila"  onClick={()=>getToggle('upazila')}  className="countries">
-                        <p>{upozilaName}</p>
+                        <p>{billingAdd?.city? billingAdd?.city : "Please Search"}</p>
                         <div className="icon-container">
                             <svg className={`icon ${toggle.clicked === 'upazila'? 'active':''}`}  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" >
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -246,11 +246,11 @@ const BillingAddress = () =>{
                                 }
                                 {/* initialize load tag */}
                                 {
-                                     !loading  && searchedUpozila === null && <span>Search Your Country</span>
+                                     !loading  && searchedUpozila === null && <li className="option">Search for select</li>
                                 }
                                 {/* no data show tag  */}
                                 {
-                                    !isLoading && searchedUpozila !== null && searchedUpozila?.length <= 0 && <span> Oops! No Countries Show</span>
+                                    !isLoading && searchedUpozila !== null && searchedUpozila?.length <= 0 && <span> Oops! No upazilas Show</span>
                                 }
                                 {/* show the searched country */}
                                 {
@@ -264,7 +264,7 @@ const BillingAddress = () =>{
                 <div className="input-group">
                     <label htmlFor="union">Area/Union/Town</label>
                     <div id="union"  onClick={()=>getToggle('union')}  className="countries">
-                        <p>{unionName}</p>
+                        <p>{billingAdd?.union? billingAdd?.union : "Please Search"}</p>
                         <div className="icon-container">
                             <svg className={`icon ${toggle.clicked === 'union'? 'active':''}`}  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" >
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -281,11 +281,11 @@ const BillingAddress = () =>{
                                 }
                                 {/* initialize load tag */}
                                 {
-                                     !loading  && searchedUnion === null && <span>Search Your Country</span>
+                                     !loading  && searchedUnion === null && <li className="option">Search for select</li>
                                 }
                                 {/* no data show tag  */}
                                 {
-                                    !isLoading && searchedUnion !== null && searchedUnion?.length <= 0 && <span> Oops! No Countries Show</span>
+                                    !isLoading && searchedUnion !== null && searchedUnion?.length <= 0 && <span> Oops! No Unions Show</span>
                                 }
                                 {/* show the searched country */}
                                 {

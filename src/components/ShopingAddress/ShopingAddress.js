@@ -1,8 +1,8 @@
 import { useContext, useEffect, useReducer,  useState } from "react";
 import { ADDRESS_CONTEXT } from "../../App";
 import useDivision from "../../hooks/useDivision";
-import { billingReducer, shoppingReducer} from "../../state/action";
-import { billingAddress, shopingAddress } from "../../state/state";
+import {shoppingReducer} from "../../state/action";
+import {shopingAddress } from "../../state/state";
   
  
 const ShopingAddress = () =>{
@@ -198,11 +198,11 @@ const ShopingAddress = () =>{
                                 }
                                 {/* initialize load tag */}
                                 {
-                                     !isLoading  && searchedDivisions === null && <span>Search Your Country</span>
+                                     !isLoading  && searchedDivisions === null && <li className="option">Search for select</li>
                                 }
                                 {/* no data show tag  */}
                                 {
-                                    !isLoading && searchedDivisions !== null && searchedDivisions.length <= 0 && <span> Oops! No Countries Show</span>
+                                    !isLoading && searchedDivisions !== null && searchedDivisions.length <= 0 && <span> Oops! No Divisions Show</span>
                                 }
                                 {/* show the searched country */}
                                 {
@@ -233,11 +233,11 @@ const ShopingAddress = () =>{
                                 }
                                 {/* initialize load tag */}
                                 {
-                                     !loading  && searchedDsitrict === null && <span>Search Your Country</span>
+                                     !loading  && searchedDsitrict === null && <li className="option">Search for select</li>
                                 }
                                 {/* no data show tag  */}
                                 {
-                                    !isLoading && searchedDsitrict !== null && searchedDsitrict?.length <= 0 && <span> Oops! No Countries Show</span>
+                                    !isLoading && searchedDsitrict !== null && searchedDsitrict?.length <= 0 && <span> Oops! No districts Show</span>
                                 }
                                 {/* show the searched country */}
                                 {
@@ -268,11 +268,11 @@ const ShopingAddress = () =>{
                                 }
                                 {/* initialize load tag */}
                                 {
-                                     !loading  && searchedUpozila === null && <span>Search Your Country</span>
+                                     !loading  && searchedUpozila === null && <li className="option">Search for select</li>
                                 }
                                 {/* no data show tag  */}
                                 {
-                                    !isLoading && searchedUpozila !== null && searchedUpozila?.length <= 0 && <span> Oops! No Countries Show</span>
+                                    !isLoading && searchedUpozila !== null && searchedUpozila?.length <= 0 && <span> Oops! No Upazilas Show</span>
                                 }
                                 {/* show the searched country */}
                                 {
@@ -303,11 +303,11 @@ const ShopingAddress = () =>{
                                 }
                                 {/* initialize load tag */}
                                 {
-                                     !loading  && searchedUnion === null && <span>Search Your Country</span>
+                                     !loading  && searchedUnion === null && <li className="option">Search for select</li>
                                 }
                                 {/* no data show tag  */}
                                 {
-                                    !isLoading && searchedUnion !== null && searchedUnion?.length <= 0 && <span> Oops! No Countries Show</span>
+                                    !isLoading && searchedUnion !== null && searchedUnion?.length <= 0 && <span> Oops! No Unions Show</span>
                                 }
                                 {/* show the searched country */}
                                 {
